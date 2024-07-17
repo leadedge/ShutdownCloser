@@ -16,6 +16,6 @@ The timer is managed using [timeout](https://learn.microsoft.com/en-us/windows-s
 
 The command console for Closer.bat is started with low affinity and lowest prority so that it is has minimal impact on the system while running. 
 
-## StartCloser.lnk
+## Closer.lnk
 
 A handy shortcut for the desktop.
