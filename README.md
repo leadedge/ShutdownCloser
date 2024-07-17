@@ -1,10 +1,9 @@
 # ShutdownCloser
-A Windows batch script scheduler for un-attended shutdown with quick and easy entry for either a timer or end time that shows the countdown progress and allows terminaton at any time..
+A Windows batch script scheduler for un-attended shutdown with quick and easy entry for either a timer or end time that shows the countdown progress and allows terminaton at any time. An addition to the many other variants. Here to share in case it is useful.
 
 ## Closer.bat
 
-A Windows batch file to set a timer or the time to Shutdown, Log off, Sleep or Hibernate.\
-An addition to the many other variants. Here to share in case it is useful.
+A batch file to set a timer or the time to Shutdown, Log off, Sleep or Hibernate.
 
 Time entry - with protection against empty or incorrect entry
 - To set a timer - enter the hours, minutes and seconds before action
