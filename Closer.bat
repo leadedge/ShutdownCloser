@@ -31,7 +31,8 @@ set secs=%tm:~6,2%
 rem
 rem Calculate start seconds (time format : 12:07:59.42)
 rem
-set /A startsecs=%starthrs%*3600+%startmins%*60+%secs%
+rem set /A startsecs=%starthrs%*3600+%startmins%*60+%secs%
+set /A startsecs=starthrs*3600+startmins*60+secs
 rem
 rem Look for command line arguments
 rem No args - user entry
@@ -49,6 +50,7 @@ if "%3" NEQ "" goto dotimer
 set endhrs=%1%
 set endmins=%2%
 set secs=0
+rem
 goto CalcHours
 rem
 rem 3 args - hours, minutes, seconds until shutdown
@@ -57,6 +59,7 @@ rem
 set hrs=%1%
 set mins=%2%
 set secs=%3%
+rem
 goto CalcTotal
 rem
 rem User entry to select action
@@ -101,8 +104,10 @@ rem If end < start. Add 24 hours to the end hour.
 rem
 :CalcHours
 if %endhrs% GTR %starthrs% goto CalcEndTime
+rem
 rem Next day
 set /A endhrs=endhrs+24
+rem
 rem
 rem Calculate end seconds
 rem
@@ -111,7 +116,8 @@ set /A endsecs = %endhrs%*3600+%endmins%*60+%secs%
 rem
 rem Calculate timer for end hour entry
 rem
-set /A timer = endsecs-startsecs
+set /A timer    = endsecs-startsecs
+rem
 if %timer% EQU 0 goto End
 if %timer% GTR 0 goto CountDown
 goto End
@@ -139,6 +145,7 @@ rem
 set /A timer=%hrs%*3600+%mins%*60+%secs%
 set /A endhrs=starthrs+%hrs%
 set /A endmins=startmins+%mins%
+rem
 if %timer% EQU 0 goto End
 if %timer% GTR 0 goto CountDown
 goto End
@@ -150,9 +157,10 @@ rem
 if %timer% GTR 99999 set /A timer=99999
 if %timer% LSS 0 set /A timer=0
 rem
+rem echo timer limited [%timer%]
+rem
 rem Show the timer and end time 
 rem
-echo.
 set /A hrs=%timer%/3600
 set /A mins=(%timer%-%hrs%*3600)/60
 set /A secs=(%timer%-%hrs%*3600-%mins%*60)
@@ -176,6 +184,7 @@ set tm=%endhrs%:%endmins% %amp%
 rem
 rem Show end time and timer
 rem
+echo.
 if %action% EQU 1 echo Shutdown at %tm% after %timer% seconds (%hrs% hours %mins% mins %secs% secs)
 if %action% EQU 2 echo Log off at %tm% after %timer% seconds (%hrs% hours %mins% mins %secs% secs)
 if %action% EQU 3 echo Sleep at %tm% after %timer% seconds (%hrs% hours %mins% mins %secs% secs)
